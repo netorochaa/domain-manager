@@ -1,5 +1,6 @@
 <script setup>
 import DomainIndex from './views/Domain/Index.vue'
+import DomainCreate from './views/Domain/Create.vue'
 </script>
 
 <template>
@@ -7,7 +8,7 @@ import DomainIndex from './views/Domain/Index.vue'
   <div class="container">
     <div class="row">
       <div class="col-4">
-        form
+        <DomainCreate />
       </div>
       <div class="col-8">
         <DomainIndex />
