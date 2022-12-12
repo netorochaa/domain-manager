@@ -1,3 +1,7 @@
+<script setup>
+  import axios from 'axios'
+</script>
+
 <template>
   <div class="card" style="width: 100%;">
     <div class="alert alert-danger" role="alert" v-if="response.error">
@@ -51,14 +55,22 @@
     },
 
     methods: {
-      save(){
-        axios.post('http://localhost:8000/api/domains', Object.values(user.value))
+      async save(){
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: Object.values(this.domain)
+        }
+
+        await fetch('http://localhost:8000/api/domains', requestOptions)
           .then((res) => {
             this.response.success = true
+            console.log('tudo certo')
           })
           .catch((error) => {
             this.response.error = true
             this.response.message = error.data.message
+            console.log('tudo errado: ' + error.data.message)
           })
       }
     }
