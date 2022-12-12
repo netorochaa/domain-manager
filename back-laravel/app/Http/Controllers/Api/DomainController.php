@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DomainRequest;
 use App\Models\Domain;
-use Illuminate\Http\Request;
 
 class DomainController extends Controller
 {
@@ -39,14 +38,10 @@ class DomainController extends Controller
         return response()->json('Domain updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Domain  $domain
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Domain $domain)
     {
-        //
+        $domain->delete();
+
+        return response()->json('Domain deleted');
     }
 }
