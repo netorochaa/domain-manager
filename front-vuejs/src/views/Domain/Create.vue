@@ -4,12 +4,9 @@
 
 <template>
   <div class="card" style="width: 100%;">
-    <div class="alert alert-danger" role="alert" v-if="response.error">
+    <div class="alert alert-danger" role="alert" v-if="errorMessage">
       Something went wrong! <br />
-      {{ error }}
-    </div>
-    <div class="alert alert-success" role="alert" v-if="response.success">
-      Domain saved!
+      {{ errorMessage }}
     </div>
 
     <div class="card-header">
@@ -42,11 +39,7 @@
     data() {
       return {
         action: 'Create',
-        response: {
-          error: false,
-          success: false,
-          message: ''
-        },
+        errorMessage: '',
         domain: {
           name: '',
           tld: ''
@@ -55,22 +48,15 @@
     },
 
     methods: {
-      async store(){
-        const requestOptions = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: Object.values(this.domain)
-        }
-
-        await fetch('http://localhost:8000/api/domains/bla', requestOptions)
-          .then((res) => {
-            this.response.success = true
-            console.log('tudo certo', res)
-          })
+      store(){
+        this.axios
+          .post('http://localhost:8000/api/domains', this.domain)
+          .then((res) => (
+            this.$router.push({ name: 'home' })
+          ))
           .catch((error) => {
-            this.response.error = true
-            this.response.message = error.data.message
-            console.log('tudo errado: ' + error.data.message)
+            this.errorMessage = error
+            console.log('tudo errado: ' + error)
           })
       }
     }

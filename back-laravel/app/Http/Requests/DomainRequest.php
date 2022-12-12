@@ -14,8 +14,8 @@ class DomainRequest extends FormRequest
     public function rules()
     {
         return [
-            'domain.name' => ['required', 'string', 'max:255'],
-            'domain.tld' => ['required', 'string', 'max:3']
+            'name' => ['required', 'string', 'max:255'],
+            'tld' => ['required', 'string', 'max:3']
         ];
     }
 }

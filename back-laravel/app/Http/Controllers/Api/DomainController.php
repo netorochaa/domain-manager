@@ -18,9 +18,9 @@ class DomainController extends Controller
 
     public function store(DomainRequest $request)
     {
-        $validated = $request->validate();
-
-        Domain::create($validated);
+        Domain::create(
+            $request->safe()->only(['name', 'tld'])
+        );
 
         return response()->json('Domain created');
     }
