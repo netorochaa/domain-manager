@@ -1,7 +1,3 @@
-<script setup>
-  import axios from 'axios'
-</script>
-
 <template>
   <div class="card" style="width: 100%;">
     <div class="alert alert-danger" role="alert" v-if="errorMessage">
