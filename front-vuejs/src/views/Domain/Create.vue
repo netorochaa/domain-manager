@@ -8,7 +8,7 @@
       Something went wrong! <br />
       {{ error }}
     </div>
-    <div class="alert alert-danger" role="alert" v-if="response.success">
+    <div class="alert alert-success" role="alert" v-if="response.success">
       Domain saved!
     </div>
 
@@ -16,7 +16,7 @@
       <h5 class="card-title">{{ action }} domain</h5>
     </div>
 
-    <form name="create.domain" @submit.prevent="save">
+    <form name="create.domain" @submit.prevent="store">
       <div class="card-body">
         <div class="mb-3">
           <label for="domain.name" class="form-label">Name</label>
@@ -55,17 +55,17 @@
     },
 
     methods: {
-      async save(){
+      async store(){
         const requestOptions = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: Object.values(this.domain)
         }
 
-        await fetch('http://localhost:8000/api/domains', requestOptions)
+        await fetch('http://localhost:8000/api/domains/bla', requestOptions)
           .then((res) => {
             this.response.success = true
-            console.log('tudo certo')
+            console.log('tudo certo', res)
           })
           .catch((error) => {
             this.response.error = true
