@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DomainRequest;
 use App\Models\Domain;
 use Illuminate\Http\Request;
 
@@ -15,15 +16,13 @@ class DomainController extends Controller
             ->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(DomainRequest $request)
     {
-        //
+        $validated = $request->validate();
+
+        Domain::create($validated);
+
+        return response()->json('Domain created');
     }
 
     /**
