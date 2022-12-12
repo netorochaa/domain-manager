@@ -55,8 +55,7 @@
             this.$router.push({ name: 'home' })
           ))
           .catch((error) => {
-            this.errorMessage = error
-            console.log('tudo errado: ' + error)
+            this.errorMessage = error.response.data.message
           })
       }
     }
