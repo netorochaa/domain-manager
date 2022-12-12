@@ -9,7 +9,7 @@
       <h5 class="card-title">{{ action }} domain</h5>
     </div>
 
-    <form name="create.domain" @submit.prevent="store">
+    <form name="create.domain" @submit.prevent="save">
       <div class="card-body">
         <div class="mb-3">
           <label for="domain.name" class="form-label">Name</label>
@@ -36,24 +36,46 @@
       return {
         action: 'Create',
         errorMessage: '',
-        domain: {
-          name: '',
-          tld: ''
-        }
+        domain: {}
+      }
+    },
+
+    created(){
+      if(this.$route.params.id){
+        this.axios
+          .get(`http://localhost:8000/api/domains/${this.$route.params.id}/edit`)
+          .then((res) => {
+              this.domain = res.data;
+          });
+
+          this.action = 'Update'
       }
     },
 
     methods: {
-      store(){
-        this.axios
-          .post('http://localhost:8000/api/domains', this.domain)
-          .then((res) => (
-            this.$router.push({ name: 'home' })
-          ))
+      save(){
+        let url = 'http://localhost:8000/api/domains'
+        let method = 'post'
+
+        if(this.$route.params.id){
+          url = `${url}/${this.$route.params.id}`
+          method = 'put'
+        }
+
+        this.axios({
+          method: method,
+          url: url,
+          data: this.domain
+        })
+          .then((res) => this.redirectToHome())
           .catch((error) => {
             this.errorMessage = error.response.data.message
           })
-      }
+      },
+      redirectToHome(){
+        this.$router.push({ name: 'home' })
+      },
+      
     }
   }
 </script>

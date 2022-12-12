@@ -15,6 +15,11 @@ const router = createRouter({
       name: 'create',
       component: DomainCreate
     },
+    {
+      path: '/edit/:id',
+      name: 'edit',
+      component: DomainCreate
+    },
   ]
 })
 

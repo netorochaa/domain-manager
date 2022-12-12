@@ -25,27 +25,18 @@ class DomainController extends Controller
         return response()->json('Domain created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Domain  $domain
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Domain $domain)
+    public function edit(Domain $domain)
     {
-        //
+        return response()->json($domain);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Domain  $domain
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Domain $domain)
+    public function update(Domain $domain, DomainRequest $request)
     {
-        //
+        $domain->update(
+            $request->safe()->only(['name', 'tld'])
+        );
+
+        return response()->json('Domain updated');
     }
 
     /**

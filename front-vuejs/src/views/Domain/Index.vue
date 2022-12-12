@@ -17,7 +17,12 @@
           <td>{{ domain.id }}</td>
           <td>{{ domain.name }}</td>
           <td>{{ domain.tld }}</td>
-          <td></td>
+          <td>
+            <div class="btn-group" role="group">
+                <router-link :to="{name: 'edit', params: { id: domain.id }}" class="btn btn-success">Edit</router-link>
+                <!-- <button class="btn btn-danger" @click="deleteProduct(domain.id)">Delete</button> -->
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
