@@ -33,9 +33,11 @@
     },
 
     created(){
-      fetch('http://localhost:8000/api/domains')
-        .then(response => response.json())
-        .then(records => this.domains = records)
+      this.axios
+        .get('http://localhost:8000/api/domains/')
+        .then(records => {
+          this.domains = records.data
+        })
     }
   }
 </script>

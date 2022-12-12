@@ -1,6 +1,5 @@
 <script setup>
-import DomainIndex from './views/Domain/Index.vue'
-import DomainCreate from './views/Domain/Create.vue'
+  import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
